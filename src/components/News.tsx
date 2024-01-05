@@ -1,5 +1,5 @@
 import React from 'react';
-import {View} from 'react-native';
+import {ScrollView, View} from 'react-native';
 import NewsItem from './NewsItem';
 
 const News = () => {
@@ -42,7 +42,7 @@ const News = () => {
     },
   ];
   return (
-    <View>
+    <ScrollView>
       {NewsItems.map((item, index) => {
         return (
           <View key={index}>
@@ -55,7 +55,7 @@ const News = () => {
           </View>
         );
       })}
-    </View>
+    </ScrollView>
   );
 };
 export default News;

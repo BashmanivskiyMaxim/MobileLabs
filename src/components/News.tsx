@@ -15,7 +15,7 @@ const News: React.FC = () => {
   const {data, isloading, error} = useFetch<NewsItem>(
     'https://raw.githubusercontent.com/BashmanivskiyMaxim/MobileLabs/main/data/news.json',
   );
-
+  console.log(data);
   return (
     <ScrollView>
       {isloading && <Text>Loading...</Text>}

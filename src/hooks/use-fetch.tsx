@@ -6,7 +6,12 @@ type FetchDataType<T> = {
   error: string | null;
 };
 
-const useFetch = <T,>(url: string): FetchDataType<T> => {
+type FetchType = 'json' | 'images';
+
+const useFetch = <T,>(
+  url: string,
+  type: FetchType = 'json',
+): FetchDataType<T> => {
   const [data, setData] = useState<T[]>([]);
   const [isloading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -15,17 +20,35 @@ const useFetch = <T,>(url: string): FetchDataType<T> => {
     const fetchData = async () => {
       try {
         const response = await fetch(url);
-        const json = await response.json();
-        setData(json);
+
+        if (type === 'json') {
+          const jsonData = await response.json();
+          setData(jsonData);
+        } else if (type === 'images') {
+          const json = await response.json();
+
+          const imageFiles = json.filter((file: any) =>
+            file.name.match(/\.(jpg|jpeg|png|gif)$/i),
+          );
+
+          const images = imageFiles.map((imageFile: any) => {
+            const imageUrl = imageFile.download_url;
+
+            return imageUrl;
+          });
+
+          setData(images);
+        }
+
         setIsLoading(false);
       } catch (err) {
-        setError('Error loading data');
+        setError('Error fetching data');
         setIsLoading(false);
       }
     };
 
     fetchData();
-  }, [url]);
+  }, [url, type]);
 
   return {data, isloading, error};
 };

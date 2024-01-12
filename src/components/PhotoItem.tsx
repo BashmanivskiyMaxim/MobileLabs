@@ -11,7 +11,7 @@ const imageWidth = (width - 30) / 2;
 const PhotoItem: FC<PhotoItemInterdace> = ({sourceImg}) => {
   return (
     <View style={styles.container}>
-      <Image style={styles.image} source={sourceImg} />
+      <Image style={styles.image} source={{uri: sourceImg}} />
     </View>
   );
 };

@@ -1,24 +1,20 @@
 import React from 'react';
-import {ScrollView, StyleSheet} from 'react-native';
+import {ScrollView, StyleSheet, Text} from 'react-native';
 import PhotoItem from './PhotoItem';
+import useFetch from '../hooks/use-fetch';
 
 const GalleryScreen = () => {
-  const photo = [
-    {source: require('../assets/politehnika.jpg')},
-    {source: require('../assets/politehnika.jpg')},
-    {source: require('../assets/politehnika.jpg')},
-    {source: require('../assets/politehnika.jpg')},
-    {source: require('../assets/politehnika.jpg')},
-    {source: require('../assets/politehnika.jpg')},
-    {source: require('../assets/politehnika.jpg')},
-    {source: require('../assets/politehnika.jpg')},
-    {source: require('../assets/politehnika.jpg')},
-  ];
+  const {data, isloading, error} = useFetch<string>(
+    'https://api.github.com/repos/BashmanivskiyMaxim/MobileLabs/contents/data/images',
+    'images',
+  );
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      {photo.map((item, index) => {
-        return <PhotoItem key={index} sourceImg={item.source} />;
+      {isloading && <Text>Loading...</Text>}
+      {error && <Text>{error}</Text>}
+      {data.map((item, index) => {
+        return <PhotoItem key={index} sourceImg={item} />;
       })}
     </ScrollView>
   );

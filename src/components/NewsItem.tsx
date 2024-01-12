@@ -4,17 +4,11 @@ import {Image, StyleSheet, Text, View} from 'react-native';
 interface NewsItemInterface {
   title: string;
   description: string;
-  date: Date;
+  date: string;
   img: any;
 }
 
 const NewsItem: FC<NewsItemInterface> = ({title, description, date, img}) => {
-  const formattedDate = date.toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
-
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
@@ -22,7 +16,7 @@ const NewsItem: FC<NewsItemInterface> = ({title, description, date, img}) => {
       </View>
       <View style={styles.textContainer}>
         <Text style={styles.title}>{title}</Text>
-        <Text style={styles.date}>{formattedDate}</Text>
+        <Text style={styles.date}>{date}</Text>
         <Text style={styles.description}>{description}</Text>
       </View>
     </View>

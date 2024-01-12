@@ -8,6 +8,7 @@ interface NewsItem {
   title: string;
   description: string;
   image: string;
+  date: string;
 }
 
 const News: React.FC = () => {
@@ -25,7 +26,7 @@ const News: React.FC = () => {
             <NewsItem
               title={item.title}
               description={item.description}
-              date={new Date()}
+              date={item.date}
               img={`https://raw.githubusercontent.com/BashmanivskiyMaxim/MobileLabs/main/data/${item.image}`}
             />
           </View>

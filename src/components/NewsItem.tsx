@@ -18,7 +18,7 @@ const NewsItem: FC<NewsItemInterface> = ({title, description, date, img}) => {
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
-        <Image source={img} style={styles.image} />
+        <Image source={{uri: img}} style={styles.image} resizeMode="contain" />
       </View>
       <View style={styles.textContainer}>
         <Text style={styles.title}>{title}</Text>

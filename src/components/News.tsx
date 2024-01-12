@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {ScrollView, Text, View} from 'react-native';
 import NewsItem from './NewsItem';
-import axios from 'axios';
+import useFetch from '../hooks/use-fetch';
 
 interface NewsItem {
   id: number;
@@ -11,80 +11,15 @@ interface NewsItem {
 }
 
 const News: React.FC = () => {
-  const [news, setNews] = useState<NewsItem[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchNews = async () => {
-      try {
-        const response = await axios.get(
-          'https://raw.githubusercontent.com/BashmanivskiyMaxim/MobileLabs/main/data/news.json',
-        );
-
-        setNews(response.data);
-        setLoading(false);
-      } catch (err) {
-        setError('Error loading news data');
-        setLoading(false);
-      }
-    };
-
-    fetchNews();
-  }, []);
-
-  const NewsItems = [
-    {
-      title: 'news',
-      description: 'news1',
-      date: new Date(),
-      img: require('../assets/logo.png'),
-    },
-    {
-      title: 'news',
-      description: 'news1',
-      date: new Date(),
-      img: require('../assets/logo.png'),
-    },
-    {
-      title: 'news',
-      description: 'news1',
-      date: new Date(),
-      img: require('../assets/logo.png'),
-    },
-    {
-      title: 'news',
-      description: 'news1',
-      date: new Date(),
-      img: require('../assets/logo.png'),
-    },
-    {
-      title: 'news',
-      description: 'news1',
-      date: new Date(),
-      img: require('../assets/logo.png'),
-    },
-    {
-      title: 'news',
-      description: 'news1',
-      date: new Date(),
-      img: require('../assets/logo.png'),
-    },
-  ];
-
-  if (loading) {
-    return <Text>Loading...</Text>;
-  }
-
-  if (error) {
-    return <Text>{error}</Text>;
-  }
-
-  console.log(NewsItems);
+  const {data, isloading, error} = useFetch<NewsItem>(
+    'https://raw.githubusercontent.com/BashmanivskiyMaxim/MobileLabs/main/data/news.json',
+  );
 
   return (
     <ScrollView>
-      {news.map((item, index) => {
+      {isloading && <Text>Loading...</Text>}
+      {error && <Text>{error}</Text>}
+      {data.map((item, index) => {
         return (
           <View key={index}>
             <NewsItem

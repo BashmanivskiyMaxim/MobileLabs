@@ -1,0 +1,38 @@
+[
+    {
+        "id": 1,
+        "title": "Заголовок новини 1",
+        "description": "Опис новини 1",
+        "image": "images/news1.jpg"
+    },
+    {
+        "id": 2,
+        "title": "Заголовок новини 2",
+        "description": "Опис новини 2",
+        "image": "images/news2.jpg"
+    },
+    {
+        "id": 3,
+        "title": "Заголовок новини 1",
+        "description": "Опис новини 1",
+        "image": "images/news1.jpg"
+    },
+    {
+        "id": 4,
+        "title": "Заголовок новини 2",
+        "description": "Опис новини 2",
+        "image": "images/news2.jpg"
+    },
+    {
+        "id": 5,
+        "title": "Заголовок новини 1",
+        "description": "Опис новини 1",
+        "image": "images/news1.jpg"
+    },
+    {
+        "id": 6,
+        "title": "Заголовок новини 2",
+        "description": "Опис новини 2",
+        "image": "images/news2.jpg"
+    }
+]
